@@ -69,7 +69,7 @@ class Model {
   }
   compararRespuestas() {
     this.comparar = true;
-    this.correctas = this.respuestas.filter((a, i) => a == this.preguntas[i].respuesta).length;
+    this.correctas = this.respuestas.filter((item, index) => item == this.preguntas[index].respuesta).length;
     this.inform();
   }
   reiniciar() {
@@ -140,10 +140,10 @@ const ListarRespuestas = ({ model }) => {
         {model.comparar && expresion + model.correctas + ' out of ' + model.preguntas.length + ' correct!'}
       </h1>
       {
-        model.respuestas.map((a, i) => {
-          let clase = model.comparar?(a == model.preguntas[i].respuesta?'text-success':'text-danger'):'';
-          let contenido= clase=='text-danger'?<strong><strike>{a}</strike> {model.preguntas[i].respuesta}</strong>:<strong>{a}</strong>;
-          return <p className={clase}>{i + 1}. {model.preguntas[i].pregunta} {contenido}</p>;
+        model.respuestas.map((item, index) => {
+          let clase = model.comparar?(item == model.preguntas[index].respuesta?'text-success':'text-danger'):'';
+          let contenido= clase=='text-danger'?<strong><strike>{item}</strike> {model.preguntas[index].respuesta}</strong>:<strong>{item}</strong>;
+          return <p className={clase}>{index + 1}. {model.preguntas[index].pregunta} {contenido}</p>;
         })
       }
       <div className='text-center'>
