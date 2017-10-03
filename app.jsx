@@ -132,7 +132,7 @@ const CrearPreguntas = ({ model }) => {
 }
 
 const ListarRespuestas = ({ model }) => {
-  let expresion=model.correctas?(model.correctas === model.preguntas.length?'Wow, ':''):'Ooops, ';
+  let expresion = model.correctas ? (model.correctas === model.preguntas.length ? 'Wow, ' : '') : 'Ooops, ';
   return (
     <div id='respuestas'>
       <h1 className="text-center">
@@ -141,8 +141,8 @@ const ListarRespuestas = ({ model }) => {
       </h1>
       {
         model.respuestas.map((item, index) => {
-          let clase = model.comparar?(item == model.preguntas[index].respuesta?'text-success':'text-danger'):'';
-          let contenido= clase=='text-danger'?<strong><strike>{item}</strike> {model.preguntas[index].respuesta}</strong>:<strong>{item}</strong>;
+          let clase = model.comparar ? (item == model.preguntas[index].respuesta ? 'text-success' : 'text-danger') : '';
+          let contenido = clase == 'text-danger' ? <strong><strike>{item}</strike> {model.preguntas[index].respuesta}</strong> : <strong>{item}</strong>;
           return <p className={clase}>{index + 1}. {model.preguntas[index].pregunta} {contenido}</p>;
         })
       }
