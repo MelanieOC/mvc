@@ -52,20 +52,16 @@ class Model {
   constructor(preguntas) {
     this.preguntas = preguntas;
     this.marcar = true;
-    this.contar = 0,
-      this.respuestas = [],
-      this.correctas = 0,
-      this.completo = false,
-      this.comparar = false
+    this.contar = 0;
+    this.respuestas = [];
+    this.correctas = 0;
+    this.completo = false;
+    this.comparar = false;
   }
   guardarRespuesta(value) {
     if (this.marcar) {
       this.marcar = false;
       this.respuestas[this.contar] = value;
-      if (value == this.preguntas[model.contar].respuesta) {
-        this.correctas++;
-      }
-
       let t = setTimeout(() => {
         this.marcar = true;
         this.siguiente();
@@ -90,6 +86,7 @@ class Model {
   }
   compararRespuestas() {
     this.comparar = true;
+    this.correctas= this.respuestas.filter((a,i)=>a == this.preguntas[i].respuesta).length;
     this.inform();
   }
   reiniciar() {
@@ -130,7 +127,7 @@ const CrearPreguntas = ({ model }) => {
   );
 }
 
-const ListarRespuestas = ({model}) => {
+const ListarRespuestas = ({ model }) => {
   return (
     <div id='respuestas'>
       <h1 className="text-center">
@@ -179,7 +176,7 @@ const App = ({ model }) => {
         }
         <div id="prueba">
           {!model.completo && <CrearPreguntas model={model} />}
-          {model.completo && <ListarRespuestas  model={model}/>}
+          {model.completo && <ListarRespuestas model={model} />}
         </div>
         <RedesSociales />
       </div>
@@ -195,7 +192,6 @@ const App = ({ model }) => {
       }
     </div>);
 }
-
 
 let model = new Model(preguntas);
 let render = () => {
