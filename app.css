@@ -1,0 +1,148 @@
+body {
+  padding: 50px 0;
+  background-color: #fff3ec!important;
+}
+button{
+  outline: none;
+}
+button:focus{
+  outline: none;
+  border: none;
+}
+header {
+  margin-bottom: 50px;
+  position: relative;
+  min-height: 90px;
+}
+@media (min-width: 992px){
+  header img {
+      min-width: 235px;
+  }
+}
+
+header img {
+  max-width: 120px;
+}
+#siguiente, #anterior{
+  background-color: transparent;
+  padding: 0 10px;
+}
+#progreso .progress{
+  height: 6px;
+}
+.progress .progress-bar {
+  background-color: #4b4668;
+}
+#progreso {
+  position: absolute;
+  top: -25px;
+  left: 0;
+  right: 0;
+}
+#flechas{
+  padding-top: 30px;
+}
+#flechas img{
+  width: 40px;
+  height: 40px;
+}
+#flechas .disabled{
+  opacity: 0.3;
+}
+.content {
+  background-color: #fff;
+  padding: 60px 80px 90px;
+  box-shadow: 4px 6px 38px hsla(0,100%,79%,.3);
+  max-width: 90%;
+  margin: 0 auto;
+  position: relative;
+}
+#prueba{
+  color: #4b4668;
+}
+#prueba p{
+  font-size: 150%;
+}
+#prueba h1 {
+  margin-bottom: 50px;
+}
+#respuestas{
+  max-width: 80%;
+  margin: 0 auto;
+}
+.opciones button {
+  background-color: #edecf0;
+  color: #4b4668;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 15px;
+  text-align: left;
+  border: 1px solid #4b4668;
+  padding: 6px 44px 6px 14px;
+  width: 100%;
+}
+.letra {
+  font-size: 14px;
+  font-weight: 400;
+  display: inline-block;
+  padding: 3px 8px 4px;
+  background-color: #4b4668;
+  color: #fff;
+  margin-right: 8px;
+  position: relative;
+  top: -4px;
+  border-radius: 3px;
+}
+
+.seleccionado button{
+  border-width: 2px;
+}
+.seleccionado button:after {
+  font-family: FontAwesome;
+  content: "\f00c";
+  color: #4b4668;
+  position: absolute;
+  right: 25px;
+}
+#redesSociales{
+   margin-top: 30px;
+   opacity: 0.5;
+}
+#redesSociales:hover{
+   opacity: 1;
+}
+.btn-dark {
+  text-align: center;
+  padding: 6px 14px;
+  background-color: #4b4668;
+  color: #fff;
+  margin-top: 30px;
+}
+@media (max-width: 850px){
+  header{
+      margin-bottom: 20px;
+      padding-top: 20px;
+  }
+  #flechas{
+      position: absolute;
+      top: 0;
+      right: 20px;
+  }
+  .content {
+      padding: 20px;
+  }
+  #respuestas{
+      max-width: 100%;
+  }
+  #prueba h1{
+      font-size: 24px;
+      margin-bottom: 20px;
+  }
+  #prueba p{
+      font-size: 110%;
+  }
+  .opciones button{
+      font-weight: 400;
+      font-size: 15px;
+  }
+}
