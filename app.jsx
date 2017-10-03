@@ -30,24 +30,7 @@ const preguntas = [
     imagen: 'assets/img/car.svg'
   }
 ]
-const RedesSociales = () => {
-  return (
-    <div id="redesSociales" className="text-center">
-      <a href="#" className="fa-stack fa-lg" style={{ color: '#00C3FF' }}>
-        <i className="fa fa-circle fa-stack-2x"></i>
-        <i className="fa fa-twitter fa-stack-1x fa-inverse"></i>
-      </a>
-      <a href="#" className="fa-stack fa-lg">
-        <i className="fa fa-circle fa-stack-2x" style={{ color: '#23239B' }}></i>
-        <i className="fa fa-facebook fa-stack-1x fa-inverse"></i>
-      </a>
-      <a href="#" className="fa-stack fa-lg">
-        <i className="fa fa-circle fa-stack-2x" style={{ color: 'red' }}></i>
-        <i className="fa fa-google-plus fa-stack-1x fa-inverse"></i>
-      </a>
-    </div>
-  );
-}
+
 class Model {
   constructor(preguntas) {
     this.preguntas = preguntas;
@@ -86,7 +69,7 @@ class Model {
   }
   compararRespuestas() {
     this.comparar = true;
-    this.correctas= this.respuestas.filter((a,i)=>a == this.preguntas[i].respuesta).length;
+    this.correctas = this.respuestas.filter((a, i) => a == this.preguntas[i].respuesta).length;
     this.inform();
   }
   reiniciar() {
@@ -97,7 +80,6 @@ class Model {
     this.comparar = false;
     this.inform();
   }
-
   subscribe(render) {
     this.render = render;
   }
@@ -105,14 +87,36 @@ class Model {
     this.render();
   }
 }
+
+const RedesSociales = () => {
+  return (
+    <div id="redesSociales" className="text-center">
+      <a href="#" className="fa-stack fa-lg" style={{ color: '#00C3FF' }}>
+        <i className="fa fa-circle fa-stack-2x"></i>
+        <i className="fa fa-twitter fa-stack-1x fa-inverse"></i>
+      </a>
+      <a href="#" className="fa-stack fa-lg">
+        <i className="fa fa-circle fa-stack-2x" style={{ color: '#23239B' }}></i>
+        <i className="fa fa-facebook fa-stack-1x fa-inverse"></i>
+      </a>
+      <a href="#" className="fa-stack fa-lg">
+        <i className="fa fa-circle fa-stack-2x" style={{ color: 'red' }}></i>
+        <i className="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+      </a>
+    </div>
+  );
+}
+
 const Opciones = ({ model, opciones }) => {
   return (
     <div className="opciones row">
       {Object.keys(opciones).map((key, index) => {
         let value = opciones[key];
-        return (<div className={model.respuestas[model.contar] == value ? 'col-md-4 seleccionado' : 'col-md-4'}>
-          <button className='btn' key={index} onClick={(e) => model.guardarRespuesta(value)}><span className='letra'>{key}</span>{value}</button>
-        </div>);
+        return (
+          <div className={model.respuestas[model.contar] == value ? 'col-md-4 seleccionado' : 'col-md-4'}>
+            <button className='btn' key={index} onClick={(e) => model.guardarRespuesta(value)}><span className='letra'>{key}</span>{value}</button>
+          </div>
+        );
       })}
     </div>
   );
@@ -128,23 +132,19 @@ const CrearPreguntas = ({ model }) => {
 }
 
 const ListarRespuestas = ({ model }) => {
+  let expresion=model.correctas?(model.correctas === model.preguntas.length?'Wow, ':''):'Ooops, ';
   return (
     <div id='respuestas'>
       <h1 className="text-center">
         {!model.comparar && 'Here are you answers:'}
-        {model.comparar && model.correctas === 0 && 'Ooops, ' + model.correctas + ' out of ' + model.preguntas.length + ' correct!'}
-        {model.comparar && model.correctas === model.preguntas.length && 'Wow, ' + model.correctas + ' out of ' + model.preguntas.length + ' correct!'}
-        {model.comparar && model.correctas < model.preguntas.length && model.correctas != 0 && model.correctas + ' out of ' + model.preguntas.length + ' correct!'}
+        {model.comparar && expresion + model.correctas + ' out of ' + model.preguntas.length + ' correct!'}
       </h1>
-      {model.respuestas.map((a, i) => {
-        if (a == model.preguntas[i].respuesta && model.comparar) {
-          return <p className="text-success">{i + 1}. {model.preguntas[i].pregunta}<strong>{a}</strong></p>
-        } else if (model.comparar) {
-          return <p className="text-danger">{i + 1}. {model.preguntas[i].pregunta}<strong><strike>{a}</strike> {model.preguntas[i].respuesta}</strong></p>
-        } else {
-          return <p>{i + 1}. {model.preguntas[i].pregunta}<strong>{a}</strong></p>;
-        }
-      })
+      {
+        model.respuestas.map((a, i) => {
+          let clase = model.comparar?(a == model.preguntas[i].respuesta?'text-success':'text-danger'):'';
+          let contenido= clase=='text-danger'?<strong><strike>{a}</strike> {model.preguntas[i].respuesta}</strong>:<strong>{a}</strong>;
+          return <p className={clase}>{i + 1}. {model.preguntas[i].pregunta} {contenido}</p>;
+        })
       }
       <div className='text-center'>
         {model.comparar && <button className='btn-lg btn-dark' onClick={() => model.reiniciar()}>Start Again</button>}
